@@ -14,7 +14,7 @@ class ProxiBlue_ReCaptcha_Model_Recaptcha extends Mage_Captcha_Model_Zend implem
     /**
      * Key in session for captcha code
      */
-    const SESSION_WORD = 'word';
+    public const SESSION_WORD = 'word';
 
 
     /**
@@ -111,7 +111,7 @@ class ProxiBlue_ReCaptcha_Model_Recaptcha extends Mage_Captcha_Model_Zend implem
         try {
             $request = Mage::app()->getRequest();
             $this->generate();
-            $this->_debug(print_r($request->getParams(),true),null,'recapctha.log');
+            $this->_debug(print_r($request->getParams(),true));
             // is this the new 'I am not a robot'?
             if($request->getParam('gcr')) {
                 $request->setParam('g-recaptcha-response', $request->getParam('gcr'));
@@ -125,7 +125,7 @@ class ProxiBlue_ReCaptcha_Model_Recaptcha extends Mage_Captcha_Model_Zend implem
                 $this->_debug("sending to " . $path . " params of " . print_r($params, true));
                 $result = $this->_sendRequest($path, $params);
                 $this->_debug("result is : " . $result);
-                $response = json_decode($result);
+                $response = json_decode($result, null, 512, JSON_THROW_ON_ERROR);
 
                 if (is_object($response) && $response->success == true) {
                     return true;
@@ -192,7 +192,7 @@ class ProxiBlue_ReCaptcha_Model_Recaptcha extends Mage_Captcha_Model_Zend implem
      */
     public function getElementId($type = 'input')
     {
-        return 'captcha-' . rand(0,1000) . '-' . $type . '-box-' . trim($this->_formId);
+        return 'captcha-' . random_int(0,1000) . '-' . $type . '-box-' . trim($this->_formId);
     }
 
     /**

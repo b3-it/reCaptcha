@@ -1,0 +1,132 @@
+
+4 files with changes
+====================
+
+1) app/code/community/ProxiBlue/ReCaptcha/Model/Recaptcha.php:13
+
+    ---------- begin diff ----------
+@@ @@
+     /**
+      * Key in session for captcha code
+      */
+-    const SESSION_WORD = 'word';
++    public const SESSION_WORD = 'word';
+
+
+     /**
+@@ @@
+         try {
+             $request = Mage::app()->getRequest();
+             $this->generate();
+-            $this->_debug(print_r($request->getParams(),true),null,'recapctha.log');
++            $this->_debug(print_r($request->getParams(),true));
+             // is this the new 'I am not a robot'?
+             if($request->getParam('gcr')) {
+                 $request->setParam('g-recaptcha-response', $request->getParam('gcr'));
+@@ @@
+                 $this->_debug("sending to " . $path . " params of " . print_r($params, true));
+                 $result = $this->_sendRequest($path, $params);
+                 $this->_debug("result is : " . $result);
+-                $response = json_decode($result);
++                $response = json_decode($result, null, 512, JSON_THROW_ON_ERROR);
+
+                 if (is_object($response) && $response->success == true) {
+                     return true;
+@@ @@
+      */
+     public function getElementId($type = 'input')
+     {
+-        return 'captcha-' . rand(0,1000) . '-' . $type . '-box-' . trim($this->_formId);
++        return 'captcha-' . random_int(0,1000) . '-' . $type . '-box-' . trim($this->_formId);
+     }
+
+     /**
+    ----------- end diff -----------
+
+Applied rules:
+ * RandomFunctionRector
+ * PublicConstantVisibilityRector (https://wiki.php.net/rfc/class_const_visibility)
+ * RemoveExtraParametersRector (https://www.reddit.com/r/PHP/comments/a1ie7g/is_there_a_linter_for_argumentcounterror_for_php/)
+ * JsonThrowOnErrorRector (http://wiki.php.net/rfc/json_throw_on_error)
+
+
+2) app/code/community/ProxiBlue/ReCaptcha/Model/Observer.php:173
+
+    ---------- begin diff ----------
+@@ @@
+      */
+     protected function _isUrlInternal($url)
+     {
+-        if (strpos($url, 'http') !== false) {
++        if (str_contains($url, 'http')) {
+             /**
+              * Url must start from base secure or base unsecure url
+              */
+-            if ((strpos($url, Mage::app()->getStore()->getBaseUrl()) === 0)
+-                || (strpos($url, Mage::app()->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true)) === 0)
++            if ((str_starts_with($url, Mage::app()->getStore()->getBaseUrl()))
++                || (str_starts_with($url, Mage::app()->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true)))
+             ) {
+                 return true;
+             }
+@@ @@
+     /**
+      * Check Captcha On Checkout as Guest Page
+      *
+-     * @param Varien_Event_Observer $observer
+      * @return $this
+      */
+     public function checkGuestCheckout(Varien_Event_Observer $observer)
+    ----------- end diff -----------
+
+Applied rules:
+ * FunctionArgumentDefaultValueReplacerRector (https://php.watch/versions/8.1/version_compare-operator-restrictions)
+ * UnionTypesRector
+ * StrStartsWithRector (https://wiki.php.net/rfc/add_str_starts_with_and_ends_with_functions)
+ * StrContainsRector (https://externals.io/message/108562 https://github.com/php/php-src/pull/5179)
+
+
+3) app/code/community/ProxiBlue/ReCaptcha/Model/Config/Lang.php:9
+
+    ---------- begin diff ----------
+@@ @@
+ class ProxiBlue_ReCaptcha_Model_Config_Lang
+ {
+
+-    private $lang = array(
++    private array $lang = array(
+         array('value' => 'en', 'label' => 'English (US)'),
+         array('value' => 'en-GB', 'label' => 'English (GB)'),
+         array('value' => 'fr', 'label' => 'French'),
+    ----------- end diff -----------
+
+Applied rules:
+ * TypedPropertyRector (https://wiki.php.net/rfc/typed_properties_v2#proposal)
+
+
+4) app/code/community/ProxiBlue/ReCaptcha/Helper/Data.php:11
+
+    ---------- begin diff ----------
+@@ @@
+ 	/**
+ 	 * The API server address
+ 	 */
+-	const RECAPTCHA_API_SERVER = "https://www.google.com";
+-	const RECAPTCHA_API_PATH = "/recaptcha/api";
+-	const RECAPTCHA_VERIFY_SERVER = "www.google.com";
+-    const RECAPTCHA_SITEVERIFY_PATH = "siteverify";
++	public const RECAPTCHA_API_SERVER = "https://www.google.com";
++	public const RECAPTCHA_API_PATH = "/recaptcha/api";
++	public const RECAPTCHA_VERIFY_SERVER = "www.google.com";
++    public const RECAPTCHA_SITEVERIFY_PATH = "siteverify";
+
+
+     public function generateCatchaBlock($area, $isolate = false) {
+    ----------- end diff -----------
+
+Applied rules:
+ * PublicConstantVisibilityRector (https://wiki.php.net/rfc/class_const_visibility)
+
+
+ [OK] 4 files would have changed (dry-run) by Rector                                                                    
+

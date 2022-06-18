@@ -12,10 +12,10 @@ class ProxiBlue_ReCaptcha_Helper_Data extends Mage_Captcha_Helper_Data {
 	/**
 	 * The API server address
 	 */
-	const RECAPTCHA_API_SERVER = "https://www.google.com";
-	const RECAPTCHA_API_PATH = "/recaptcha/api";
-	const RECAPTCHA_VERIFY_SERVER = "www.google.com";
-    const RECAPTCHA_SITEVERIFY_PATH = "siteverify";
+	public const RECAPTCHA_API_SERVER = "https://www.google.com";
+	public const RECAPTCHA_API_PATH = "/recaptcha/api";
+	public const RECAPTCHA_VERIFY_SERVER = "www.google.com";
+    public const RECAPTCHA_SITEVERIFY_PATH = "siteverify";
 
 
     public function generateCatchaBlock($area, $isolate = false) {
