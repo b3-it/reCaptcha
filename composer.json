@@ -4,7 +4,7 @@
   "license": "OSL-3.0",
   "homepage": "https://github.com/ProxiBlue/reCaptcha",
   "description": "Clean integration of Google reCaptcha to OpenMage",
-  "version": "3.0.0",
+  "version": "2.0.1",
   "authors": [
     {
       "name": "Lucas van Staden",
@@ -13,6 +13,6 @@
   ],
   "require": {
     "magento-hackathon/magento-composer-installer": "*",
-    "php": "8.0"
+    "php": ">=8.0"
   }
 }
