@@ -174,12 +174,12 @@ class ProxiBlue_ReCaptcha_Model_Observer
      */
     protected function _isUrlInternal($url)
     {
-        if (strpos($url, 'http') !== false) {
+        if (str_contains($url, 'http')) {
             /**
              * Url must start from base secure or base unsecure url
              */
-            if ((strpos($url, Mage::app()->getStore()->getBaseUrl()) === 0)
-                || (strpos($url, Mage::app()->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true)) === 0)
+            if ((str_starts_with($url, Mage::app()->getStore()->getBaseUrl()))
+                || (str_starts_with($url, Mage::app()->getStore()->getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true)))
             ) {
                 return true;
             }
@@ -243,7 +243,6 @@ class ProxiBlue_ReCaptcha_Model_Observer
     /**
      * Check Captcha On Checkout as Guest Page
      *
-     * @param Varien_Event_Observer $observer
      * @return $this
      */
     public function checkGuestCheckout(Varien_Event_Observer $observer)
