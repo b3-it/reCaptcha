@@ -1,19 +1,10 @@
-ATTENTION:
-=========
-
-I am currently considering archiving this module, as I no longer have the free time to continue supporting this code.
-as per ticket: #43, it seems there are issues in checkout with the validation of the invisible recapctha, which could be related to the usage of prototype 1.7.1
-
-I simply don't have the time due to paid work with deadlines to work on this at present.
-
-If you are using this module, I suggest looking for an alternative, or fork this and continue with it as a seperate project
-
 reCaptcha
 =========
 
 Drop-In Replacement of OpenMage core Captcha system with Googles reCaptcha
 
-http://www.proxiblue.com.au/blog/magento-recaptcha/
+Forked from
+https://github.com/ProxiBlue/reCaptcha
 
 Features: 
 =========
@@ -115,12 +106,12 @@ Direct from GitHub repo:
 
 ```
    "require": {
-       "proxiblue/recaptcha": "*"
+       "b3-it/recaptcha": "*"
    },
    "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/ProxiBlue/reCaptcha.git"
+            "url": "https://github.com/b3-it/reCaptcha.git"
         }
     ],
 ```

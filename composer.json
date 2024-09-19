@@ -1,11 +1,15 @@
 {
-  "name": "proxiblue/recaptcha",
+  "name": "b3-it/recaptcha",
   "type": "magento-module",
   "license": "OSL-3.0",
-  "homepage": "https://github.com/ProxiBlue/reCaptcha",
+  "homepage": "https://github.com/b3-it/reCaptcha",
   "description": "Clean integration of Google reCaptcha to OpenMage",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "authors": [
+    {
+      "name": "Frank Rochlitzer",
+      "email": "kontakt@b3-it.de"
+    },
     {
       "name": "Lucas van Staden",
       "email": "sales@proxiblue.com.au"
